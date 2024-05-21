@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU-Talk 메인 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #007BFF 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        #main {
+            position: relative; /* 추가: 회원정보 버튼의 위치를 조정하기 위해 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px;
+            background: #fff;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-height: 100px;
+        }
+        .user-info-btn, .friend-list-btn {
+            position: absolute; /* 절대 위치로 설정 */
+            background-color: rgb(233,233,233);
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .user-info-btn:hover, .friend-list-btn:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+        .user-info-btn {
+            top: 1px; /* 상자 내부 상단에 위치 */
+            left: 10px; /* 상자 내부 왼쪽에 위치 */
+        }
+        .friend-list-btn {
+            top: 60px; /* 상자 내부 상단에 위치 */
+            left: 10px; /* 회원정보 버튼 밑에 위치 */
+        }
+        #friend-list {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            left: 10px;
+        }
+        #friend-list h2 {
+            margin-top: 0;
+        }
+        #sidebar {
+            float: left;
+            width: 30%;
+            margin-top: 10px;
+        }
+        #sidebar .widget {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #content {
+            float: right;
+            width: 65%;
+            margin-top: 10px;
+        }
+        .clear {
+            clear: both;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 100px;
+            margin: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .green-button {
+            background-color: #28a745;
+        }
+        .green-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>KU-Talk</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html">로그아웃</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="main">
+            <h2>KU-TALK에 오신 것을 환영합니다!</h2>
+            <button class="user-info-btn" onclick="location.href='user_information.html'">회원정보</button>
+            <button onclick="location.href='create_room.html'">방 생성하러 가기</button>
+            <button class="green-button" onclick="location.href='notice.html'">공지방</button>
+            <button class="friend-list-btn"onclick="toggleFriendList()">친구목록</button>
+        </section>
+
+        <aside id="sidebar">
+            <div id="friend-list">
+                <h2>친구 목록</h2>
+                <ul>
+                    <li>친구1</li>
+                    <li>친구2</li>
+                    <li>친구3</li>
+                    <!-- 친구 목록을 동적으로 생성하려면 JavaScript를 사용합니다. -->
+                </ul>
+            </div>
+        </aside>
+        
+        <div class="clear"></div>
+    </div>
+    <script>
+        function toggleFriendList() {
+            var friendList = document.getElementById("friend-list");
+            if (friendList.style.display === "none") {
+                friendList.style.display = "block";
+            } else {
+                friendList.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

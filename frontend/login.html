@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        table {
+            width: 280px;
+            height: 250px;
+            margin: auto;
+            font-size: 15px;
+            text-align: center; /* 테이블 내부 요소들을 가운데 정렬 */
+        }
+
+        /* input, button 요소 등의 스타일 */
+        input[type="text"],
+        input[type="password"],
+        .btn {
+            width: 250px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233,233,233);
+            margin-bottom: 10px; /* 각 요소 아래 여백 추가 */
+        }
+
+        .btn {
+            width: 263px; /* 버튼 폭 수정 */
+            background-color: rgb(61, 135, 255);
+            color: white; /* 텍스트 색상 변경 */
+        }
+
+        a {
+            font-size: 12px;
+            color: rgb(0, 0, 0);
+            text-decoration-line: none;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="login(event)">
+        <table>
+        <tr>
+            <td>
+                <h2>로그인</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" placeholder="ID">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" placeholder="Password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="로그인" class="btn">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="join.html">회원가입</a> |
+                <a href="id_search.html">아이디 찾기</a> |
+                <a href="pw_search.html">비밀번호 찾기</a>
+            </td>
+        </tr>
+        </table>
+    </form>
+
+    <script>
+        function login(event) {
+            event.preventDefault(); // 폼의 기본 제출 동작을 막음
+            alert('로그인 성공');
+            location.href = 'main.html'; // main.html로 이동
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방 생성 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #007BFF 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        #main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px;
+            background: #fff;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-height: 100px;
+        }
+        .chat-room-btn {
+            width: 200px;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .chat-room-btn:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>KU-Talk</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html">로그아웃</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="main">
+            <h2>생성하려는 채팅방을 선택해주세요.</h2>
+            <h3>(건국대/랜덤 채팅방은 학교 이메일 인증 필수)</h3>
+            <button class="chat-room-btn" onclick="location.href='kku_email_verification.html'">건국대학교 채팅방</button>
+            <button class="chat-room-btn" onclick="location.href='kku_email_verification.html'">랜덤 채팅방</button>
+            <button class="chat-room-btn" onclick="location.href='room_condition.html'">일반 채팅방</button>
+        </section>
+    </div>
+</body>
+</html>

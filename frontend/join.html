@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        h2 {
+            text-align: center; /* h2 요소를 가운데 정렬 */
+        }
+
+        table {
+            width: 280px;
+            height: 550px;
+            margin: auto;      
+        }
+
+        .email {
+            width: 250px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-color: lightgray;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233,233,233);
+        }
+
+        .text {
+            width: 250px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233,233,233);
+        }
+
+        select {
+            width: 100px;
+            height: 32px;
+            font-size: 15px;
+            border: 1;
+            border-color: lightgray;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+        }
+
+        .btn {
+            width: 262px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(61, 135, 255);
+            color: white;
+        }
+
+        .verification-code {
+            width: 250px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-color: lightgray;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233, 233, 233);
+        }
+    </style>
+</head>
+<body>
+    <form id="signup-form">
+        <table>
+            <tr>
+                <td><h2>회원가입</h2></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" name="gender" value="male" id="male">
+                    <label for="male">남성</label>
+                    <input type="radio" name="gender" value="female" id="female">
+                    <label for="female">여성</label>
+                </td>
+            </tr>
+            <tr>
+                <td>아이디</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+            </tr>
+            <tr>
+                <td><input type="password" class="text" name="password"></td>
+            </tr>
+            <tr>
+                <td>비밀번호 확인</td>
+            </tr>
+            <tr>
+                <td><input type="password" class="text" name="password_confirm"></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+            </tr>
+            <tr>
+                <td class="email-container">
+                    <input type="text" class="email" name="email">  
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" onclick="sendVerificationCode()">인증번호 전송</button>
+                </td>
+            </tr>
+            <tr>
+                <td>인증번호</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="verification-code" name="verification_code">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" onclick="confirmVerificationCode()">인증번호 확인</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="가입하기" class="btn" onclick="submitForm(event)">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

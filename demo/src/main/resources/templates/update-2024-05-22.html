@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024.05.22 업데이트 내용</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('kku.jpg'); /* 이미지 파일 경로 설정 */
+            background-size: cover; /* 이미지를 요소에 맞게 조정 */
+            background-position: center; /* 이미지를 중앙에 위치 */
+            height: 100vh; /* 화면 전체 높이 */
+            width: 100%;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background-color: #ffffff;
+            font-size: 1.3em;
+            color: black;
+        }
+        header .logo {
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative; /* To position dropdown properly */
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: normal;
+        }
+        .dropdown {
+            display: none; /* 기본적으로 드롭다운 메뉴를 숨김 */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            color: black;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            width: 130px; /* 드롭다운 상자의 너비를 130px로 설정 */
+        }
+        .dropdown input[type="text"] {
+            width: 90px; /* 입력창의 너비를 설정 */
+            padding: 5px; /* 입력창 내부 여백 설정 */
+            margin: 10px; /* 입력창 외부 여백 설정 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px 12px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .show {
+            display: block; /* 드롭다운 메뉴를 보여줌 */
+        }
+        .container {
+            width: 60%; /* 컨테이너 너비를 60%로 설정 */
+            margin: 50px auto 0 auto; /* 중앙 정렬 및 위쪽 여백 설정 */
+            overflow: hidden;
+        }
+        #main {
+            padding: 20px;
+            background: #ccc;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100px;
+        }
+    </style>
+    <script>
+        function toggleDropdown(event) {
+            event.stopPropagation(); // 이벤트 전파 중지
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+
+        // 페이지의 다른 곳을 클릭했을 때 드롭다운을 닫기 위해 필요
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.getElementsByClassName("dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            KU-Talk
+        </div>
+        <nav>
+            <ul>
+                <li><a href="main">홈으로</a></li>
+                <li><a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">친구</a>
+                    <div id="dropdown" class="dropdown">
+                        <div>
+                            <input type="text" class="search-box" placeholder="친구 찾기">
+                        </div>
+                        <a href="#">박범수</a>
+                        <a href="#">강윤호</a>
+                        <a href="#">홍길동</a>
+                        <a href="#">이순신</a>
+                    </div>
+                </li>
+                <li><a href="notice_room">공지사항</a></li>
+                <li><a href="login">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="main">
+            <h2>2024.05.22 업데이트 내용</h2>
+            <p>이번 업데이트에서는 여러 가지 새로운 기능이 추가되었습니다. 주요 업데이트 내용은 다음과 같습니다:</p>
+            <ul>
+                <li>새로운 채팅 기능 추가</li>
+                <li>기존 버그 수정 및 성능 개선</li>
+                <li>사용자 인터페이스 개선</li>
+            </ul>
+            <p>궁금한 사항은 문의하기를 통해 알려주세요. 감사합니다!</p>
+        </section>
+    </div>
+</body>
+</html>

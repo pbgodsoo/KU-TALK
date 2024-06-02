@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅방</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ccc;
+            color: black;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background-color: #ffffff;
+            font-size: 1.3em;
+            color: black;
+        }
+        header .logo {
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+            height: calc(100vh - 50px);
+        }
+        .sidebar {
+            width: 30%;
+            background-color: #ffffff;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .chat-list .chat-room {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+        }
+        .chat-list .chat-room img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .chat-list .chat-room .chat-info {
+            flex-grow: 1;
+        }
+        .chat-list .chat-room .chat-info .title {
+            font-weight: bold;
+        }
+        .chat-list .chat-room .chat-info .last-message {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .sidebar .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .sidebar .actions button {
+            flex-grow: 1;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .main-chat {
+            flex-grow: 1;
+            background-color: #BACEE0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-chat .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ccc;
+        }
+        .main-chat .header .room-title {
+            font-weight: bold;
+        }
+        .main-chat .header .buttons {
+            display: flex;
+            gap: 10px;
+            position: relative; /* 부모 요소에 relative 위치 설정 추가 */
+        }
+        .main-chat .header .leave-btn {
+            order: 2;
+            padding: 5px 10px;
+            border: none;
+            background-color: #dc3545;
+            color: white;
+            cursor: pointer;
+        }
+        .main-chat .header .dropdown-btn {
+            order: 1;
+            padding: 5px 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .main-chat .messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column; /* 세로로 정렬 */
+        }
+
+        .main-chat .messages .message {
+            margin-bottom: 12px; /* 메시지 사이 간격을 조금 더 넓게 설정 */
+            padding: 10px 15px; /* 패딩을 넓혀 박스를 키움 */
+            border-radius: 12px; /* 둥근 모서리를 조금 더 강조 */
+            word-break: break-word;
+            display: block; /* 블록으로 설정하여 한 줄에 하나씩 표시 */
+            max-width: 70%;
+            width: fit-content;
+            clear: both; /* 한 줄에 하나씩 표시되도록 설정 */
+            font-size: 1.1em; /* 폰트 크기를 조금 키움 */
+        }
+
+        .main-chat .messages .message.sent {
+            background-color: #d4f8d4;
+            text-align: right;
+            align-self: flex-end; /* 오른쪽 정렬 */
+        }
+
+        .main-chat .messages .message.received {
+            background-color: #f0f0f0;
+            text-align: left;
+            align-self: flex-start; /* 왼쪽 정렬 */
+        }
+
+        .main-chat .messages .message .sender {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .main-chat .messages .message .text {
+            margin: 0;
+        }
+        .main-chat .input-box {
+            display: flex;
+            padding: 10px;
+            background-color: #ffffff;
+            border-top: 1px solid #ccc;
+        }
+        .main-chat .input-box input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .main-chat .input-box button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .message .sender {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .message .text {
+            margin: 0;
+        }
+        .message.received {
+            background-color: #f0f0f0;
+        }
+        .message.sent {
+            background-color: #d4f8d4;
+            justify-content: flex-end;
+        }
+        .message.received .text {
+            margin-left: 10px;
+        }
+        .message.sent .text {
+            margin-right: 10px;
+        }
+        
+        /* 2번 코드의 CSS 추가 */
+        body {
+            height: 100vh; /* 화면 전체 높이 */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown {
+            display: none; /* 기본적으로 드롭다운 메뉴를 숨김 */
+            position: absolute;
+            top: 100%; /* 버튼 바로 아래에 위치하게 설정 */
+            left: 0; /* 버튼의 왼쪽 정렬에 맞춤 */
+            background-color: #f9f9f9;
+            color: black;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            width: 130px; /* 드롭다운 상자의 너비를 130px로 설정 */
+        }
+        .dropdown input[type="text"] {
+            width: 90px; /* 입력창의 너비를 설정 */
+            padding: 5px; /* 입력창 내부 여백 설정 */
+            margin: 10px; /* 입력창 외부 여백 설정 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px 12px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .show {
+            display: block; /* 드롭다운 메뉴를 보여줌 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">KU-Talk</div>
+        <nav>
+            <ul>
+                <li><a href="/user_infor">회원정보</a></li>
+                <li><a href="#" onclick="toggleDropdown(event)">친구</a></li>
+                <li><a href="/notice_room">공지사항</a></li>
+                <li><a href="/login">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <div class="actions">
+                <button>참가</button>
+                <form action="/room_condition" method="get">
+                    <button type="submit">만들기</button>
+                </form>
+            </div>
+            <div class="chat-list" id="chat-list">
+                <!-- 채팅방 목록 -->
+            </div>
+        </div>
+        <div class="main-chat">
+            <div class="header">
+                <div class="room-title" id="room-title">채팅방</div>
+                <div class="buttons">
+                    <button class="dropdown-btn" onclick="toggleDropdown()">참여자 목록</button>
+                    <button class="leave-btn" onclick="leaveRoom()">나가기</button>
+                    <div id="participantDropdown" class="dropdown">
+                        <a href="declaration">강대훈 <span style="color: red;">!</span></a>
+                        <a href="declaration">강윤호 <span style="color: red;">!</span></a>
+                        <a href="declaration">박범수 <span style="color: red;">!</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="messages" id="messages">
+                <!-- 메시지 목록 -->
+            </div>
+            <div class="input-box">
+                <input type="text" id="message" placeholder="메시지를 입력하세요">
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script>
+        var stompClient = null;
+        var currentRoomId = null;
+        var currentUserId = null; // 실제 로그인한 사용자의 ID를 설정
+
+        function connect() {
+            var socket = new SockJS('/chat');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                currentUserId = frame.headers['user-name']; // 실제 로그인한 사용자의 ID 가져오기
+            });
+        }
+
+        function sendMessage() {
+            var messageContent = document.getElementById('message').value.trim();
+            if (messageContent && stompClient) {
+                var message = {
+                    message: messageContent,
+                    chatRoom: { id: currentRoomId },
+                    senderId: currentUserId
+                };
+                stompClient.send("/app/sendMessage", {}, JSON.stringify(message));
+                document.getElementById('message').value = '';
+            }
+        }
+
+        function showMessage(message) {
+            var messages = document.getElementById('messages');
+            var messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            if (message.senderId === currentUserId) {
+                messageElement.classList.add('sent');
+            } else {
+                messageElement.classList.add('received');
+            }
+            messageElement.innerHTML = `<div class="sender">${message.senderId}</div><div class="text">${message.message}</div>`;
+            messages.appendChild(messageElement);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        async function fetchChatRooms() {
+            try {
+                const response = await fetch('/api/rooms');
+                if (response.ok) {
+                    const rooms = await response.json();
+                    const chatList = document.getElementById('chat-list');
+
+                    chatList.innerHTML = ''; // 기존 목록 초기화
+
+                    rooms.forEach(room => {
+                        const roomElement = document.createElement('div');
+                        roomElement.classList.add('chat-room');
+                        roomElement.innerHTML = `
+                            <img src="user.jpg" alt="Avatar">
+                            <div class="chat-info">
+                                <div class="title">${room.name}</div>
+                                <div class="last-message">참여자 제한: ${room.maxUsers}명</div>
+                            </div>
+                        `;
+                        roomElement.addEventListener('click', () => openRoom(room.id, room.name));
+                        chatList.appendChild(roomElement);
+                    });
+                } else {
+                    console.error('Failed to fetch chat rooms:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching chat rooms:', error);
+            }
+        }
+
+        let subscriptions = {};  // 현재 구독 중인 채팅방을 추적하기 위한 객체
+        async function openRoom(roomId, roomName) {
+            console.log(`Opening room: ${roomId}, ${roomName}`);
+
+            // 기존 구독 취소
+            if (currentRoomId && subscriptions[currentRoomId]) {
+                console.log(`Unsubscribing from room: ${currentRoomId}`);
+                subscriptions[currentRoomId].unsubscribe();
+                delete subscriptions[currentRoomId];
+            }
+
+            currentRoomId = roomId;
+            document.getElementById('room-title').textContent = roomName;
+
+            // 기존 메시지 불러오기
+            try {
+                const response = await fetch(`/api/rooms/${roomId}`);
+                if (response.ok) {
+                    const room = await response.json();
+                    const messages = document.getElementById('messages');
+                    messages.innerHTML = '';
+                    room.messages.forEach(message => {
+                        showMessage(message);
+                    });
+                } else {
+                    console.error('Failed to fetch room messages:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching room messages:', error);
+            }
+
+            // 새로운 방 구독 설정
+            if (stompClient) {
+                const subscription = stompClient.subscribe(`/topic/room/${roomId}`, function (messageOutput) {
+                    showMessage(JSON.parse(messageOutput.body));
+                });
+                subscriptions[roomId] = subscription;
+                console.log(`Subscribed to room: ${roomId}`);
+            }
+        }
+
+        function leaveRoom() {
+            if (currentRoomId && subscriptions[currentRoomId]) {
+                console.log(`Unsubscribing from room: ${currentRoomId}`);
+                subscriptions[currentRoomId].unsubscribe();
+                delete subscriptions[currentRoomId];
+            }
+            currentRoomId = null;
+            document.getElementById('room-title').textContent = '채팅방';
+            document.getElementById('messages').innerHTML = '';
+        }
+
+        window.onload = function() {
+            fetchChatRooms();
+            connect();
+        };
+
+        function toggleDropdown() {
+            document.getElementById("participantDropdown").classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                var dropdowns = document.getElementsByClassName("dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

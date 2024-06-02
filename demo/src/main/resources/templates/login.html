@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        table {
+            width: 280px;
+            height: 250px;
+            margin: auto;
+            font-size: 15px;
+            text-align: center; /* 테이블 내부 요소들을 가운데 정렬 */
+            border: 2px solid black; /* 테두리 추가 */
+            border-radius: 15px; /* 테두리 둥글게 */
+            padding: 20px; /* 내부 여백 추가 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        }
+
+        /* input, button 요소 등의 스타일 */
+        input[type="text"],
+        input[type="password"],
+        .btn {
+            width: 250px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233,233,233);
+            margin-bottom: 10px; /* 각 요소 아래 여백 추가 */
+        }
+
+        .btn {
+            width: 263px; /* 버튼 폭 수정 */
+            background-color: rgb(61, 135, 255);
+            color: white; /* 텍스트 색상 변경 */
+        }
+
+        a {
+            font-size: 12px;
+            color: rgb(0, 0, 0);
+            text-decoration-line: none;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr><td><h2>로그인</h2></td></tr>
+
+        <form action="/loginProc" method="post">
+            <tr><td><input id = "username" type="text" name="username" placeholder="id"></td></tr>
+            <tr><td><input id = "password" type="password" name="password" placeholder="password"></td></tr>
+            <tr><td><button type="submit" class="btn">로그인</button></td></tr>
+        </form>
+        
+        <tr><td>
+            <a href="/join">회원가입</a> |
+            <a href="/id_search">아이디 찾기</a> |
+            <a href="/pw_reset">비밀번호 찾기</a>
+        </td></tr>
+    </table>
+</body>
+</html>

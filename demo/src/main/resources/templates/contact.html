@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('kku.jpg'); /* 이미지 파일 경로 설정 */
+            background-size: cover; /* 이미지를 요소에 맞게 조정 */
+            background-position: center; /* 이미지를 중앙에 위치 */
+            height: 100vh; /* 화면 전체 높이 */
+            width: 100%;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background-color: #ffffff;
+            font-size: 1.3em;
+            color: black;
+        }
+        header .logo {
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative; /* To position dropdown properly */
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: normal;
+        }
+        .dropdown {
+            display: none; /* 기본적으로 드롭다운 메뉴를 숨김 */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            color: black;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            width: 130px; /* 드롭다운 상자의 너비를 130px로 설정 */
+        }
+        .dropdown input[type="text"] {
+            width: 90px; /* 입력창의 너비를 설정 */
+            padding: 5px; /* 입력창 내부 여백 설정 */
+            margin: 10px; /* 입력창 외부 여백 설정 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px 12px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .show {
+            display: block; /* 드롭다운 메뉴를 보여줌 */
+        }
+        #main {
+            padding: 20px;
+            background: #fff;
+            margin: 20px auto; /* 중앙 정렬 */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100px;
+            width: 80%; /* 컨테이너 너비를 80%로 설정 */
+            max-width: 600px; /* 최대 너비를 600px로 설정 */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px 0;
+        }
+        input, textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            resize: none; /* 텍스트 영역 크기 조절 비활성화 */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleDropdown(event) {
+            event.stopPropagation(); // 이벤트 전파 중지
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+
+        // 페이지의 다른 곳을 클릭했을 때 드롭다운을 닫기 위해 필요
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.getElementsByClassName("dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            KU-Talk
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/main">홈으로</a></li>
+                <li><a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">친구</a>
+                    <div id="dropdown" class="dropdown">
+                        <div>
+                            <input type="text" class="search-box" placeholder="친구 찾기">
+                        </div>
+                        <a href="#">박범수</a>
+                        <a href="#">강윤호</a>
+                        <a href="#">홍길동</a>
+                        <a href="#">이순신</a>
+                    </div>
+                </li>
+                <li><a href="/notice_room">공지사항</a></li>
+                <li><a href="/login">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="main">
+            <h2>문의하기</h2>
+            <form id="contactForm">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" required>
+                
+                <label for="content">내용</label>
+                <textarea id="content" name="content" rows="10" required></textarea>
+                
+                <button type="submit">제출하기</button>
+            </form>
+            <div id="message">문의 내용이 작성되었습니다.</div>
+        </section>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('message').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

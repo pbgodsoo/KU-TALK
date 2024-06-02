@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        .container {
+            width: 320px;
+            margin: 50px auto; /* margin-top을 50px로 설정하여 아래로 내림 */
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .email, .text, .verification-code {
+            width: 300px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233, 233, 233);
+        }
+
+        select {
+            width: 100px;
+            height: 32px;
+            font-size: 15px;
+            border: 1px solid lightgray;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(61, 135, 255);
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-small {
+            width: 120px; /* 원하는 가로 길이로 설정 */
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            background-color: rgb(61, 170, 255);
+            color: white;
+            cursor: pointer;
+            margin-right: 100px; /* 버튼 사이의 간격 추가 */
+        }
+
+        .btn-check {
+            width: 90px; /* 중복확인 버튼의 가로 길이 설정 */
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            background-color: #dbf7d7; /* 밝은 초록색 */
+            color: black;
+            cursor: pointer;
+            margin-right: 5px; /* 버튼 사이의 간격 추가 */
+        }
+
+        .message {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .available {
+            color: green;
+        }
+
+        .unavailable {
+            color: red;
+        }
+
+        .email-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function sendVerificationCode() {
+            const email = document.querySelector('input[name="email"]').value;
+            fetch('/mailSend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('인증번호가 전송되었습니다.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 전송에 실패했습니다.');
+            });
+        }
+
+        function verifyCode() {
+            const email = document.querySelector('input[name="email"]').value;
+            const authNum = document.querySelector('input[name="verification_code"]').value;
+            fetch('/mailauthCheck', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, authNum: authNum })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'ok') {
+                    alert('인증이 완료되었습니다.');
+                    document.getElementById('register-btn').disabled = false;
+                } else {
+                    alert('인증번호가 올바르지 않습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 확인에 실패했습니다.');
+            });
+        }
+
+        function checkUsername() {
+            const username = document.querySelector('input[name="username"]').value;
+            console.log("Checking username:", username);
+            fetch('/usernameCheck', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: username })
+            })
+            .then(response => response.text())
+            .then(data => {
+                const messageElement = document.getElementById('username-message');
+                console.log("Username check response:", data);
+                if (data === 'available') {
+                    messageElement.textContent = '사용할 수 있는 아이디입니다.';
+                    messageElement.className = 'message available';
+                } else {
+                    messageElement.textContent = '이미 사용 중인 아이디입니다.';
+                    messageElement.className = 'message unavailable';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('아이디 확인에 실패했습니다.');
+            });
+        }
+
+        function checkEmail() {
+            const email = document.querySelector('input[name="email"]').value;
+            console.log("Checking email:", email);
+            fetch('/emailCheck', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.text())
+            .then(data => {
+                const messageElement = document.getElementById('email-message');
+                console.log("Email check response:", data);
+                if (data === 'available') {
+                    messageElement.textContent = '사용할 수 있는 이메일입니다.';
+                    messageElement.className = 'message available';
+                } else {
+                    messageElement.textContent = '이미 사용 중인 이메일입니다.';
+                    messageElement.className = 'message unavailable';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('이메일 확인에 실패했습니다.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form id="signup-form" action="/joinProc" method="post" name="joinForm">
+            <table>
+                <tr><td><h2>회원가입</h2></td></tr>
+                <tr><td>이름</td></tr>
+                <tr><td><input type="text" class="text" name="name"></td></tr>
+                <tr><td>성별</td></tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="sex" value="male" id="male"><label for="male">남성</label>
+                        <input type="radio" name="sex" value="female" id="female"><label for="female">여성</label>
+                    </td>
+                </tr>
+                <tr><td>아이디</td></tr>
+                <tr><td><input type="text" class="text" name="username" id="username"></td></tr>
+                <tr><td><button type="button" class="btn-check" onclick="checkUsername()">중복확인</button></td></tr>
+                <tr><td><span id="username-message" class="message"></span></td></tr>
+
+                <tr><td>비밀번호</td></tr>
+                <tr><td><input type="password" class="text" name="password"></td></tr>
+                <tr><td>비밀번호 확인</td></tr>
+                <tr><td><input type="password" class="text" name="password_confirm"></td></tr>
+                <tr><td>이메일</td></tr>
+                <tr><td><input type="text" class="email" name="email"></td></tr>
+                <tr>
+                    <td>
+                        <div class="button-container">
+                            <button type="button" class="btn-check" onclick="checkEmail()">중복확인</button>
+                            <button type="button" class="btn-small" onclick="sendVerificationCode()">인증번호 전송</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td><span id="email-message" class="message"></span></td></tr>
+                <tr><td>인증번호</td></tr>
+                <tr>
+                    <td><input type="text" class="verification-code" name="verification_code"></td>
+                </tr>
+                <tr><td><button type="button" class="btn-small" onclick="verifyCode()">인증번호 확인</button></td></tr>
+                <tr><td><input type="submit" value="회원가입" class="btn" id="register-btn" disabled></td></tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

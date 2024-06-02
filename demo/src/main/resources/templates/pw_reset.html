@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .email-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .email-container input[type="email"] {
+            flex: 1;
+        }
+
+        .email-container button {
+            margin-left: 10px;
+        }
+
+        #id-output {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        button[type="submit"] {
+            background-color: rgb(61, 135, 255);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: rgb(61, 135, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>비밀번호 찾기</h2>
+        <form id="pw-search-form" onsubmit="resetPassword(event)">
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required>
+            <button type="button" onclick="sendVerificationCode()">인증번호 전송</button>
+            
+            <label for="verification_code">인증번호</label>
+            <input type="text" id="verification_code" name="verification_code" required>
+            <button type="button" onclick="verifyCode()">인증번호 확인</button>
+
+            <label for="new_password">새 비밀번호</label>
+            <input type="password" id="new_password" name="new_password" required>
+
+            <label for="confirm_new_password">새 비밀번호 확인</label>
+            <input type="password" id="confirm_new_password" name="confirm_new_password" required>
+
+            <button type="submit" id="reset-button" disabled>비밀번호 재설정</button>
+        </form>
+    </div>
+
+    <script>
+        function sendVerificationCode() {
+            const email = document.querySelector('input[name="email"]').value;
+            fetch('/mailSend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('인증번호가 전송되었습니다.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 전송에 실패했습니다.');
+            });
+        }
+
+        function verifyCode() {
+            const email = document.querySelector('input[name="email"]').value;
+            const authNum = document.querySelector('input[name="verification_code"]').value;
+            fetch('/mailauthCheck', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, authNum: authNum })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'ok') {
+                    alert('인증이 완료되었습니다.');
+                    isVerified = true; // 인증 상태 업데이트
+                    document.getElementById('reset-button').disabled = false; // 비밀번호 재설정 버튼 활성화
+                } else {
+                    alert('인증번호가 올바르지 않습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 확인에 실패했습니다.');
+            });
+        }
+
+        function resetPassword(event) {
+            event.preventDefault(); // 폼의 기본 제출 이벤트를 방지합니다.
+            const username = document.querySelector('input[name="username"]').value;
+            const new_password = document.querySelector('input[name="new_password"]').value;
+            const confirm_new_password = document.querySelector('input[name="confirm_new_password"]').value;
+
+            if (!new_password || new_password.trim() === "") {
+                alert('새 비밀번호를 입력해주세요.');
+                return;
+            }
+
+            if (new_password !== confirm_new_password) {
+                alert('새 비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            fetch('/resetPassword', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: username, new_password: new_password })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'okk') {
+                    alert('비밀번호가 재설정되었습니다.');
+                    window.location.href = '/login'; // 로그인 페이지로 리다이렉트
+                } else {
+                    alert('비밀번호 재설정에 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('비밀번호 재설정 과정에서 오류가 발생했습니다.');
+            });
+        }
+    </script>
+</body>
+</html>

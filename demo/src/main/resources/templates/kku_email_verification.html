@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>건국대학교 이메일 인증</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .email-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .email-container input[type="email"] {
+            flex: 1;
+        }
+
+        .email-container button {
+            margin-left: 10px;
+        }
+
+        #id-output {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            background-color: rgb(61, 135, 255);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: rgb(40, 114, 227);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>건국대학교 이메일 인증</h2>
+        <form id="pw-search-form" onsubmit="verifyCode(event)">
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required>
+            <button type="button" onclick="sendVerificationCode()">인증번호 전송</button>
+            
+            <label for="verification_code">인증번호</label>
+            <input type="text" id="verification_code" name="verification_code" required>
+
+            <button type="submit">인증번호 확인</button>
+        </form>
+    </div>
+
+    <script>
+        function sendVerificationCode() {
+            const email = document.querySelector('input[name="email"]').value;
+            if (!validateEmail(email)) {
+                alert('이메일 형식이 올바르지 않습니다. @kku.ac.kr 형식을 사용해주세요.');
+                return;
+            }
+    
+            fetch('/mailSend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('인증번호가 전송되었습니다.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 전송에 실패했습니다.');
+            });
+        }
+    
+        function verifyCode(event) {
+            event.preventDefault();
+            const email = document.querySelector('input[name="email"]').value;
+            const authNum = document.querySelector('input[name="verification_code"]').value;
+            if (!validateEmail(email)) {
+                alert('이메일 형식이 올바르지 않습니다. @kku.ac.kr 형식을 사용해주세요.');
+                return;
+            }
+    
+            // 이메일을 인증하고 저장하는 요청
+            fetch('/api/certifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ schoolEmail: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('인증이 완료되었습니다.');
+                window.location.href = '/main0';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('인증번호 확인에 실패했습니다.');
+            });
+        }
+    
+        function validateEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@kku\.ac\.kr$/;
+            return emailPattern.test(email);
+        }
+    </script>
+</body>
+</html>

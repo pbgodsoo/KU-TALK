@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신고 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center; /* 화면의 가로 중앙에 정렬 */
+            align-items: flex-start; /* 화면의 세로 상단에 정렬 */
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            padding-top: 50px; /* 상단 여백 추가 */
+        }
+        .yellow-box {
+            padding: 100px;
+            background-color: rgb(255, 255, 67);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .report-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .report-label {
+            background-color: #d9d9d9;
+            padding: 20px; /* 상자의 높이를 키우기 위해 padding을 증가 */
+            border: 1px solid #ccc;
+            border-radius: 10px 0 0 10px; /* 모서리 둥글기를 키움 */
+            font-size: 1.2em; /* 폰트 크기를 키움 */
+        }
+        .report-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            background-color: #f9f9f9;
+            padding: 20px; /* 상자의 높이를 키우기 위해 padding을 증가 */
+            border: 1px solid #ccc;
+            border-radius: 0 10px 10px 0; /* 모서리 둥글기를 키움 */
+            cursor: pointer;
+            width: 250px; /* 너비를 증가 */
+            text-align: left;
+            font-size: 1.2em; /* 폰트 크기를 키움 */
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 250px; /* 너비를 증가 */
+            border: 1px solid #ccc;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 10px 10px; /* 모서리 둥글기를 키움 */
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 15px 20px; /* 상자의 높이를 키우기 위해 padding을 증가 */
+            text-decoration: none;
+            display: block;
+            font-size: 1.2em; /* 폰트 크기를 키움 */
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .report-dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .submit-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px; /* 상단 여백 추가 */
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: red;
+            text-align: center;
+            display: none; /* 처음에는 보이지 않도록 설정 */
+        }
+    </style>
+    <script>
+        function selectReason(event) {
+            const selectedReason = event.target.textContent;
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+            dropdownBtn.textContent = selectedReason;
+        }
+
+        function submitReport() {
+            const messageBox = document.querySelector('.message');
+            messageBox.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="yellow-box">
+        <div class="report-container">
+            <div class="report-label">신고 사유</div>
+            <div class="report-dropdown">
+                <div class="dropdown-btn">신고 사유 선택</div>
+                <div class="dropdown-content">
+                    <a href="#" onclick="selectReason(event)">욕설 및 비하</a>
+                    <a href="#" onclick="selectReason(event)">성적 발언 및 성차별적 발언</a>
+                    <a href="#" onclick="selectReason(event)">유출 또는 사기</a>
+                    <a href="#" onclick="selectReason(event)">상업적 광고 및 판매</a>
+                    <a href="#" onclick="selectReason(event)">음란물/불건전 만남 및 대화</a>
+                </div>
+            </div>
+        </div>
+        <button class="submit-button" onclick="submitReport()">제출</button>
+        <div class="message">신고가 접수 되었습니다.</div>
+    </div>
+</body>
+</html>

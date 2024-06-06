@@ -225,37 +225,6 @@
             display: flex;
             flex-direction: column;
         }
-        .dropdown {
-            display: none; /* 기본적으로 드롭다운 메뉴를 숨김 */
-            position: absolute;
-            top: 100%; /* 버튼 바로 아래에 위치하게 설정 */
-            left: 0; /* 버튼의 왼쪽 정렬에 맞춤 */
-            background-color: #f9f9f9;
-            color: black;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            width: 130px; /* 드롭다운 상자의 너비를 130px로 설정 */
-        }
-        .dropdown input[type="text"] {
-            width: 90px; /* 입력창의 너비를 설정 */
-            padding: 5px; /* 입력창 내부 여백 설정 */
-            margin: 10px; /* 입력창 외부 여백 설정 */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .dropdown a {
-            color: black;
-            padding: 10px 12px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        .dropdown a:hover {
-            background-color: #f1f1f1;
-        }
-        .show {
-            display: block; /* 드롭다운 메뉴를 보여줌 */
-        }
     </style>
 </head>
 <body>
@@ -264,7 +233,6 @@
         <nav>
             <ul>
                 <li><a href="/user_infor">회원정보</a></li>
-                <li><a href="#" onclick="toggleDropdown(event)">친구</a></li>
                 <li><a href="/notice_room">공지사항</a></li>
                 <li><a href="/login">로그아웃</a></li>
             </ul>
@@ -286,13 +254,7 @@
             <div class="header">
                 <div class="room-title" id="room-title">채팅방</div>
                 <div class="buttons">
-                    <button class="dropdown-btn" onclick="toggleDropdown()">참여자 목록</button>
                     <button class="leave-btn" onclick="leaveRoom()">나가기</button>
-                    <div id="participantDropdown" class="dropdown">
-                        <a href="declaration">강대훈 <span style="color: red;">!</span></a>
-                        <a href="declaration">강윤호 <span style="color: red;">!</span></a>
-                        <a href="declaration">박범수 <span style="color: red;">!</span></a>
-                    </div>
                 </div>
             </div>
             <div class="messages" id="messages">

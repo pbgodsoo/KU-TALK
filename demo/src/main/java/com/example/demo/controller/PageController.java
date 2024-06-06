@@ -127,4 +127,9 @@ public class PageController {
     public String getUser_infoPage(){
         return "user_info1";
     }
+
+    @GetMapping("/notice_form")
+    public String getNotice_formPage() {
+        return "notice_form";
+    }
 }

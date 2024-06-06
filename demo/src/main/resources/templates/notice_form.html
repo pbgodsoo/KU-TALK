@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 등록</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background-color: #ffffff;
+            font-size: 1.3em;
+            color: black;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+        header .logo {
+            font-weight: bold;
+            margin-left: 20px; /* 왼쪽에 여백 추가 */
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative; /* 하위 메뉴의 위치를 설정하기 위해 필요 */
+        }
+        nav ul li a {
+            color: black; /* 링크 색상을 검은색으로 변경 */
+            text-decoration: none;
+            margin-right: 20px; /* 오른쪽에 여백 추가 */
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            margin-top: 100px; /* 헤더 높이만큼 마진 추가 */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            resize: none; /* 크기 조절 불가 설정 */
+            height: 200px; /* 세로 길이 설정 */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            KU-Talk
+        </div>
+        <nav>
+            <ul>
+                <li><a href="notice_room">공지사항</a></li>
+                <li><a href="login">로그아웃</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>공지사항 등록</h1>
+        <form action="/notices" method="post">
+            <div>
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <div>
+                <button type="submit">등록</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

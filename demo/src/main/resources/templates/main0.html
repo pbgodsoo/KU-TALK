@@ -67,37 +67,6 @@
             cursor: pointer; /* Cursor pointer on hover */
             font-size: 1.2em; /* Adjust font size */
         }
-        .dropdown {
-            display: none; /* 기본적으로 드롭다운 메뉴를 숨김 */
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #f9f9f9;
-            color: black;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            width: 130px; /* 드롭다운 상자의 너비를 130px로 설정 */
-        }
-        .dropdown input[type="text"] {
-            width: 90px; /* 입력창의 너비를 설정 */
-            padding: 5px; /* 입력창 내부 여백 설정 */
-            margin: 10px; /* 입력창 외부 여백 설정 */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .dropdown a {
-            color: black;
-            padding: 10px 12px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        .dropdown a:hover {
-            background-color: #f1f1f1;
-        }
-        .show {
-            display: block; /* 드롭다운 메뉴를 보여줌 */
-        }
     </style>
 </head>
 <body>
@@ -108,17 +77,6 @@
         <nav>
             <ul>
                 <li><a href="user_infor">회원정보</a></li>
-                <li><a href="#" onclick="toggleDropdown(event)">친구</a>
-                    <div id="dropdown" class="dropdown">
-                        <div>
-                            <input type="text" class="search-box" placeholder="친구 찾기">
-                        </div>
-                        <a href="#">박범수</a>
-                        <a href="#">강윤호</a>
-                        <a href="#">홍길동</a>
-                        <a href="#">이순신</a>
-                    </div>
-                </li>
                 <li><a href="notice_room">공지사항</a></li>
                 <li><a href="login">로그아웃</a></li>
             </ul>
@@ -133,24 +91,5 @@
             <button class="chat-room-btn" onclick="location.href='roby1_participate'">일반 채팅방</button> 
         </div>
     </main>
-    <script>
-        function toggleDropdown(event) {
-            event.stopPropagation(); // 이벤트 전파 중지
-            document.getElementById("dropdown").classList.toggle("show");
-        }
-
-        // 페이지의 다른 곳을 클릭했을 때 드롭다운을 닫기 위해 필요
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropdown-toggle')) {
-                var dropdowns = document.getElementsByClassName("dropdown");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
 </body>
 </html>

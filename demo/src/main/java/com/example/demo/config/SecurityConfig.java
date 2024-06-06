@@ -6,6 +6,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +30,8 @@ public class SecurityConfig {
                  .authorizeHttpRequests((auth) -> auth
                          // 특정 경로는 모든 사용자에게 허용
                          .requestMatchers("/", "/login", "/join", "/id_search", "/pw_reset", "/loginProc", "/joinProc", "/mailSend", "/mailauthCheck", "/findUsername", "/users/findUsernameByEmail", "/resetPassword", "/usernameCheck", "/emailCheck").permitAll()
+                         .requestMatchers("/notices/add", "/notices/edit/**").hasRole("ADMIN")
+                         .requestMatchers("/notices/**").authenticated()
                          // 그 외의 모든 요청은 인증된 사용자에게만 허용
                          .anyRequest().authenticated()
                  )
@@ -34,7 +42,7 @@ public class SecurityConfig {
                          // 로그인 처리 URL 설정
                          .loginProcessingUrl("/loginProc")
                          // 로그인 성공 후 이동할 기본 경로 설정
-                         .defaultSuccessUrl("/main", true)
+                         .successHandler(customAuthenticationSuccessHandler())
                          // 로그인 실패 시 이동할 경로 설정
                          .failureUrl("/login?error=true")
                          // 모든 사용자에게 로그인 페이지 접근 허용
@@ -45,6 +53,33 @@ public class SecurityConfig {
  
          // 구성된 HttpSecurity 객체를 빌드하여 반환
          return http.build();
+    }
+
+    // 사용자 정의 인증 성공 핸들러 Bean 등록
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    // CustomAuthenticationSuccessHandler 클래스 정의
+    public static class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+        @Override
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, 
+                                            org.springframework.security.core.Authentication authentication) 
+                                            throws IOException, ServletException {
+            // 사용자 역할에 따른 리다이렉션 로직
+            String role = authentication.getAuthorities().stream()
+                                        .map(grantedAuthority -> grantedAuthority.getAuthority())
+                                        .filter(authority -> authority.equals("admin"))
+                                        .findFirst()
+                                        .orElse("ROLE_USER");
+
+            if ("admin".equals(role)) {
+                response.sendRedirect("/notice_form");
+            } else {
+                response.sendRedirect("/main");
+            }
+        }
     }
     
 }

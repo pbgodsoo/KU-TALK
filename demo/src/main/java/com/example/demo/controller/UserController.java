@@ -44,8 +44,6 @@ public class UserController {
         if (user != null) {//사용자의 정보가 null이 아닌경우에 업데이트수행
             user.setName(name);
             user.setSex(sex);
-            user.setAge(age);
-            user.setIntroduce(introduce);
             userService.updateUser(user);
             //사용자의 정보들을 업데이트
         }

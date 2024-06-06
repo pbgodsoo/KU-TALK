@@ -24,10 +24,6 @@ public class UserEntity {
     private String email;
     private String sex;
     private String role;
-    private String introduce;
-    private String tier;
-    private Integer age;
-    private Integer goodcount;
 
 
 }

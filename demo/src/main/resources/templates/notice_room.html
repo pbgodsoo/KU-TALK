@@ -98,7 +98,7 @@
         <nav>
             <ul>
                 <li><a href="/main">홈으로</a></li>
-                <li><a href="/notice_room">공지사항</a></li>
+                <li><a href="/notices/notice_room">공지사항</a></li>
                 <li><a href="/logout">로그아웃</a></li>
             </ul>
         </nav>
@@ -106,18 +106,11 @@
 
     <div class="container">
         <section id="main">
-            <a href="/contact"><button class="contact-button">문의하기</button></a>
-            <h2>공지사항</h2>
-            <div class="notice">
-                <h3>안녕하세요. KU-Talk입니다.</h3>
-                <p><a href="/update-2024-05-22">2024.05.22 업데이트 내용</a></p>
-            </div>
-            <div class="notice">
-                <h3>안녕하세요. KU-Talk입니다.</h3>
-                <p><a href="/update-2024-05-20">2024.05.20 업데이트 내용</a></p>
-            </div>
-            <div class="admin">
-                <a href="/notice_form"><button>공지사항 등록</button></a>
+            <h2>공지 사항 목록</h2>
+            <div th:each="notice : ${notices}" class="notice">
+                <h3 th:text="${notice.title}">공지 제목</h3>
+                <p th:text="${notice.content}">공지 내용</p>
+                <p><strong>작성일:</strong> <span th:text="${notice.date}">작성일</span></p>
             </div>
         </section>
     </div>

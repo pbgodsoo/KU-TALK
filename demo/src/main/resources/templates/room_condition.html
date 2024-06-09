@@ -113,24 +113,13 @@
         </div>
     </div>
     <script>
-        document.getElementById('public-btn').addEventListener('click', function() {
-            this.classList.add('selected');
-            document.getElementById('private-btn').classList.remove('selected');
-        });
-        document.getElementById('private-btn').addEventListener('click', function() {
-            this.classList.add('selected');
-            document.getElementById('public-btn').classList.remove('selected');
-        });
-
         async function startChat() {
             const roomName = document.getElementById('room-name').value;
             const roomLimit = document.getElementById('room-limit').value;
-            const isPublic = document.getElementById('public-btn').classList.contains('selected');
 
             const roomData = {
                 name: roomName,
                 maxUsers: roomLimit,
-                isPublic: isPublic
             };
 
             const response = await fetch('/api/rooms/create', {

@@ -64,11 +64,6 @@ public class PageController {
         
         return "redirect:/login";
     }
-/*
-    @GetMapping("/notice_room")
-    public String getNotice_roomPage() {
-        return "notice_room";
-    }*/
 
     @GetMapping("/chatroom_list")
     public String getChatroom_listPage() {

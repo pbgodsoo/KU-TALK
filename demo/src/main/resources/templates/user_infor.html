@@ -171,21 +171,12 @@
                 <img src="user.jpg" alt="프로필 사진">
             </div>
             <form method="post" action="/update-user-info">
-                <div th:if="${user != null}">
-                    <ul class="user-info">
-                        <li><label>아이디:</label> <span th:text="${user.id}">1</span></li>
-                        <li><label>이름:</label> <input type="text" name="name" th:value="${user.name}"></li>
-                        <li><label>성별:</label> <input type="text" name="sex" th:value="${user.sex}"></li>
-                        <li><label>나이:</label> <input type="number" name="age" th:value="${user.age}"></li>
-                        <li><label>티어:</label> <span th:text="${user.tier}">Gold</span></li>
-                        <li><label>좋아요 개수:</label> <span th:text="${user.goodcount}">100</span></li>
-                        <li class="intro"><label>자기소개:</label> <textarea name="introduce" th:text="${user.introduce}"></textarea></li>
-                    </ul>
-                    <button type="submit" class="save-btn">저장</button>
-                </div>
-                <div th:if="${user == null}">
-                    <p>사용자 정보를 불러올 수 없습니다.</p>
-                </div>
+                <ul class="user-info">
+                    <li><label>아이디:</label> <span id = "username"></span></li>
+                    <li><label>이름:</label> <span id="name"></span></li>
+                    <li><label>성별:</label> <span id="sex"></span></li>
+                    <li><label>이메일:</label> <span id="email"></span></li>
+                </ul>
             </form>
             <!-- 회원탈퇴 섹션 -->
             <div id="withdraw-section">
@@ -196,7 +187,24 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        //
+        $.ajax({
+            url: '/users/infor',
+            method: 'GET',
+            success: function(data) {
+                $('#username').text(data.username);
+                $('#name').text(data.name);
+                $('#sex').text(data.sex);
+                $('#email').text(data.email);
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX error:', status, error);  // 오류를 콘솔에 출력하여 디버깅
+                alert('Failed to load user information.');
+            }
+        });
+        //
         function toggleDropdown(event) {
             event.stopPropagation(); // 이벤트 전파 중지
             document.getElementById("dropdown").classList.toggle("show");

@@ -29,7 +29,7 @@ public class SecurityConfig {
                  // HTTP 요청에 대한 인증 및 권한 설정
                  .authorizeHttpRequests((auth) -> auth
                          // 특정 경로는 모든 사용자에게 허용
-                         .requestMatchers("/", "/login", "/join", "/id_search", "/pw_reset", "/loginProc", "/joinProc", "/mailSend", "/mailauthCheck", "/findUsername", "/users/findUsernameByEmail", "/resetPassword", "/usernameCheck", "/emailCheck", "/notices/add", "/notices/form", "/notices/list").permitAll()
+                         .requestMatchers("/", "/login", "/join", "/id_search", "/pw_reset", "/loginProc", "/joinProc", "/mailSend", "/mailauthCheck", "/findUsername", "/users/findUsernameByEmail", "/resetPassword", "/usernameCheck", "/emailCheck", "/notices/add", "/notices/form", "/notices/list", "/users/infor").permitAll()
                          .requestMatchers("/notices/add", "/notices/edit/**").hasRole("ADMIN")
                          .requestMatchers("/notices/**").authenticated()
                          // 그 외의 모든 요청은 인증된 사용자에게만 허용

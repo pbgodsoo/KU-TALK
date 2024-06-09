@@ -28,14 +28,21 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+/* 
     @GetMapping("/user-info")//현재 로그인 된 사용자의 정보를 가져와 모델에 추가
     public ModelAndView getUserInfo() {
         UserEntity user = userService.getCurrentUser();
         ModelAndView mav = new ModelAndView("user_infor");//해당정보를 user_infor에 표시
         mav.addObject("user", user);
         return mav;
+    }*/
+
+    @GetMapping("/infor")
+    public UserEntity getUserInfo() {
+        // 현재 인증된 사용자의 정보를 반환
+        return userService.getCurrentUser();
     }
+
     //사용자 정보를 업데이트하는 메소드
     @PostMapping("/update-user-info")
     public ModelAndView updateUserInfo(@RequestParam Long id, @RequestParam String name, @RequestParam String sex,

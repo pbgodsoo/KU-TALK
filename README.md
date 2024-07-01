@@ -16,6 +16,7 @@ MVC 패턴을 사용함으로써 코드의 복잡성을 줄일 수 있었고, �
 ### 로그인 및 회원가입, 아이디 찾기, 비밀번호 찾기
 
 <img width="266" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/95044a43-c603-4fda-ad9f-2063e2677562">
+
 ![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/b6434014-99ff-44c9-be1e-d6e359d35a3e)
 
 

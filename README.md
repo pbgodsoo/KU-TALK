@@ -8,11 +8,13 @@ KU-TALK은 Spring boot를 이용한 채팅 웹 페이지입니다.
 코드의 가독성과 유지보수를 위해 SPRING REST API를 사용하였다.
 
 <img width="304" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/c91ccdc2-71ef-47d7-b9f4-ee2773aa8c42">
-MVC 패턴
+
+## MVC 패턴
 MVC 패턴을 사용함으로써 코드의 복잡성을 줄일 수 있었고, 하나의 모델을 여러개의 뷰와 함께 사용할 수 있어, 재사용성을 높일 수 있었다.
 
 ![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/4d69afb4-0be5-4eb7-8490-b14fd33ce9d7)
-로그인 및 회원가입, 아이디 찾기, 비밀번호 찾기
+
+### 로그인 및 회원가입, 아이디 찾기, 비밀번호 찾기
 
 ![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/e39f0118-d4e3-4c9d-b76e-e4c2f54a6b04)
 건국대학교 이메일 인증을 통해 재학생 인증을 할 수 있다.

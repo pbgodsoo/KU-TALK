@@ -22,6 +22,8 @@ MVC 패턴을 사용함으로써 코드의 복잡성을 줄일 수 있었고, �
 
 건국대학교 이메일 인증을 통해 재학생 인증을 할 수 있다.
 
-<img width="445" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/c974d98f-ea7f-4fb9-aa39-6f13912e8295">
+![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/4e1e4b89-6286-4cbb-bd11-362d9d2e7b66)
+
+![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/6f683608-9e70-4650-89db-33732959cf9e)
 
 실시간 채팅

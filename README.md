@@ -12,8 +12,8 @@ MVC 패턴을 사용함으로써 코드의 복잡성을 줄일 수 있었고, �
 
 <img width="304" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/c91ccdc2-71ef-47d7-b9f4-ee2773aa8c42">
 
-![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/4d69afb4-0be5-4eb7-8490-b14fd33ce9d7)
 ### 로그인 및 회원가입, 아이디 찾기, 비밀번호 찾기
+![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/4d69afb4-0be5-4eb7-8490-b14fd33ce9d7)
 
 <img width="266" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/95044a43-c603-4fda-ad9f-2063e2677562">
 

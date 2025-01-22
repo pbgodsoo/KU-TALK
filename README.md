@@ -44,7 +44,7 @@
 
 | 이메일 인증 |
 |-------------|
-| ![이메일 인증](https://github.com/user-attachments/assets/fb6f9ac2-665d-4518-8cc3-3934d6f7f564) |
+| ![이메일 인증](https://github.com/user-attachments/assets/3ea52aa6-1557-4371-afc1-b3e558b13177) |
 
 
 

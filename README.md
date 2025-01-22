@@ -10,9 +10,9 @@
 ## 기술 스택
 - **개발 언어**: HTML, CSS, Javascript, JAVA
 - **프레임워크**: Spring boot  
-- **데이터베이스**: MySQL
+- **데이터베이스**: MySQL, Redis
 - **웹서버**: Apache Tomcat
-
+- **기타 기술 및 설계**: REST API, MVC 패턴
 
 
 <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">

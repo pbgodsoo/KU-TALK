@@ -43,7 +43,8 @@
 | <img width="255" alt="image" src="https://github.com/user-attachments/assets/5f94a222-5c88-4da7-bf76-c405f168f7d4" /> | <img width="239" alt="image" src="https://github.com/user-attachments/assets/09d8e7d7-2ed3-4606-a924-e6409d1fe59e" /> | <img width="221" alt="image" src="https://github.com/user-attachments/assets/bd2c731b-e8a1-46c5-b5d9-d3f18627bfd2" /> | <img width="246" alt="image" src="https://github.com/user-attachments/assets/2abd7807-e944-43d9-81c7-1c4eaa2c7c1a" /> |
 
 | 이메일 인증 |
-| ![이메일 인증](https://github.com/user-attachments/assets/747709b7-6afc-4120-810a-d9adc6141b65) |
+|-------------|
+| ![이메일 인증](https://github.com/user-attachments/assets/a517d148-2fc0-4c91-bc95-11a121940673) |
 
 
 

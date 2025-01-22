@@ -14,7 +14,7 @@ KU-TALK은 Spring boot를 이용한 채팅 웹 페이지입니다.
 ### REST API 구조
 코드의 가독성과 유지보수를 위해 SPRING REST API를 사용하였다.
 
-<img width="452" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/6131a935-cda7-4087-8eed-2386dffe0ae4">
+<img width="200" alt="image" src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/6131a935-cda7-4087-8eed-2386dffe0ae4">
 
 ### MVC 패턴
 MVC 패턴을 사용함으로써 코드의 복잡성을 줄일 수 있었고, 하나의 모델을 여러개의 뷰와 함께 사용할 수 있어, 재사용성을 높일 수 있었다.

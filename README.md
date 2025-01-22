@@ -2,6 +2,15 @@
 
 KU-TALK은 Spring boot를 이용한 채팅 웹 페이지입니다.
 
+## 개발 기간
+2024.5 (1개월)
+
+## 기술 스택
+- **개발 언어**: HTML, CSS, Javascript, JAVA
+- **프레임워크**: Spring boot  
+- **데이터베이스**: MySQL
+- **웹서버**: Apache Tomcat
+  
 ### REST API 구조
 코드의 가독성과 유지보수를 위해 SPRING REST API를 사용하였다.
 

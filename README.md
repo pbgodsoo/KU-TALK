@@ -44,6 +44,7 @@
 
 | 이메일 인증 |
 |-------------|
+| 건국대학교 이메일 인증을 통해 재학생 인증을 할 수 있다. |
 | ![이메일 인증](https://github.com/user-attachments/assets/3fc2ac65-67c7-429a-bd4f-5886d6e72083) |
 
 | 실시간 채팅 |
@@ -51,13 +52,6 @@
 ![실시간 채팅](https://github.com/user-attachments/assets/96f2ba51-296f-4867-a20e-bddf9b90802a)
 
 
-![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/b6434014-99ff-44c9-be1e-d6e359d35a3e)
-
-
-건국대학교 이메일 인증을 통해 재학생 인증을 할 수 있다.
-
 ![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/6b754a90-459a-48cc-ae80-d47402e5bee9)
 
 ![image](https://github.com/pbgodsoo/KU-TALK/assets/84000206/6b34da69-fbef-4fe8-b413-b1329ab880b6)
-
-실시간 채팅

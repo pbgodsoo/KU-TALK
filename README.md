@@ -11,10 +11,10 @@ KU-TALK은 Spring boot를 이용한 채팅 웹 페이지입니다.
 - **데이터베이스**: MySQL
 - **웹서버**: Apache Tomcat
 
-<table style="table-layout: fixed; width: 100%;">
+<table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
   <tr>
-    <th style="width: 50%; text-align: center;">REST API 구조</th>
-    <th style="width: 50%; text-align: center;">MVC 패턴</th>
+    <th style="text-align: center; width: 50%;">REST API 구조</th>
+    <th style="text-align: center; width: 50%;">MVC 패턴</th>
   </tr>
   <tr>
     <td style="text-align: center;">
@@ -25,11 +25,11 @@ KU-TALK은 Spring boot를 이용한 채팅 웹 페이지입니다.
     </td>
   </tr>
   <tr>
-    <td style="text-align: center;">
-      <img src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/6131a935-cda7-4087-8eed-2386dffe0ae4" alt="REST API 구조" style="width: 80%;">
+    <td style="padding: 0; text-align: center;">
+      <img src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/6131a935-cda7-4087-8eed-2386dffe0ae4" alt="REST API 구조" style="width: 100%; height: auto;">
     </td>
-    <td style="text-align: center;">
-      <img src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/c91ccdc2-71ef-47d7-b9f4-ee2773aa8c42" alt="MVC 패턴" style="width: 80%;">
+    <td style="padding: 0; text-align: center;">
+      <img src="https://github.com/pbgodsoo/KU-TALK/assets/84000206/c91ccdc2-71ef-47d7-b9f4-ee2773aa8c42" alt="MVC 패턴" style="width: 100%; height: auto;">
     </td>
   </tr>
 </table>
